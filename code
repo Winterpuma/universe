@@ -1,0 +1,51 @@
+#
+#             Оберган Татьяна
+# shag - шаг
+# a - значение переменной
+# b - последнее? значение а
+# k - порядковый номер
+# eps -
+# c - функция
+# Mx, Mn - максимум и минимум значения с
+
+a0 = float(input('Введите начальную a: '))
+b = float(input('Введите конечную а: '))
+shag = float(input('Введите шаг: '))
+eps = 1e-5
+k = 1
+
+a = a0
+
+print()
+print('   a   \u254f         c         \u254f  #  ')
+print(32 * '-')
+
+c = a**7 - a**6 + 8*a**5 - 4*a**4 + 6*a**3 + 2*a*a - 5*a + 1
+Mx = c
+Mn = c
+
+while a - eps <= b:
+    c = a**7 - a**6 + 8*a**5 - 4*a**4 + 6*a**3 + 2*a*a - 5*a + 1
+    Mx = c if c > Mx else Mx
+    Mn = c if c < Mn else Mn
+    print('{:.3f}'.format(a).rjust(6),'\u254f','{:17.5f}'.format(c),'\u254f',k)
+    a += shag
+    k += 1
+print('\n','Max(c) - Min(c) = ','{:f}'.format(Mx - Mn))
+
+a = a0
+rasst = abs(Mx) if abs(Mx) > abs(Mn) else abs(Mn)
+print('\n', '   X    ', 61*'_', 'Y')
+for i in range(k-1):
+    c = a**7 - a**6 + 8*a**5 - 4*a**4 + 6*a**3 + 2*a*a - 5*a + 1
+    M = [0] * 69
+    M[35] = '\u2502'
+    M[int((c * 30.5)//(rasst))+35] = '*'
+    print('{:5.3f}'.format(a).rjust(8),end = '')
+    for j in range(69):
+        if M[j] == 0:
+            print(' ', end = '')
+        else:
+            print(M[j], end = '')
+    print()
+    a += shag
